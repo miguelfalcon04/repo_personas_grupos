@@ -1,0 +1,7 @@
+{
+  "name": "EnrutamientosPersonasGrupos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
