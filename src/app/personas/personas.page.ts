@@ -16,8 +16,9 @@ export class PersonasPage implements OnInit {
   _people:BehaviorSubject<Person[]> = new BehaviorSubject<Person[]>([])
   people$:Observable<Person[]> = this._people.asObservable();
 
-  constructor(private peopleSv:PeopleService,
-              private modalCtrl:ModalController
+  constructor(
+    private peopleSv:PeopleService,
+    private modalCtrl:ModalController
   ) { }
 
   ngOnInit():void {
@@ -48,7 +49,11 @@ export class PersonasPage implements OnInit {
 
       }
     });
-    modal.onDidDismiss().then
+    modal.onDidDismiss().then((res:any)=>{
+      console.log(res);
+    });
+
+    await modal.present();
   }
 
 }
