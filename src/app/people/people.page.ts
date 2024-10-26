@@ -7,11 +7,11 @@ import { PeopleService } from '../core/services/impl/people.service';
 import { PersonModalComponent } from '../components/person-modal/person-modal.component';
 
 @Component({
-  selector: 'app-personas',
-  templateUrl: './personas.page.html',
-  styleUrls: ['./personas.page.scss'],
+  selector: 'app-people',
+  templateUrl: './people.page.html',
+  styleUrls: ['./people.page.scss'],
 })
-export class PersonasPage implements OnInit {
+export class PeoplePage implements OnInit {
 
   _people:BehaviorSubject<Person[]> = new BehaviorSubject<Person[]>([])
   people$:Observable<Person[]> = this._people.asObservable();

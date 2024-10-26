@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'personas',
-    loadChildren: () => import('./personas/personas.module').then( m => m.PersonasPageModule)
+    loadChildren: () => import('./people/people.module').then( m => m.PeoplePageModule)
   },
   {
     path: 'grupos',

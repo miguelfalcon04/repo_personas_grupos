@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PersonasPageRoutingModule } from './personas-routing.module';
+import { PersonasPageRoutingModule } from './people-routing.module';
 
-import { PersonasPage } from './personas.page';
 import { SharedModule } from '../shared/shared.module';
+import { PeoplePage } from './people.page';
 
 @NgModule({
   imports: [
@@ -17,6 +17,6 @@ import { SharedModule } from '../shared/shared.module';
     PersonasPageRoutingModule,
     SharedModule
   ],
-  declarations: [PersonasPage]
+  declarations: [PeoplePage]
 })
-export class PersonasPageModule {}
+export class PeoplePageModule {}
