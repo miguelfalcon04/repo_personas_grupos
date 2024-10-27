@@ -11,4 +11,5 @@ export interface Person extends Model{
         large:string,
         thumbnail:string
     }
+    group_id?:string
 }

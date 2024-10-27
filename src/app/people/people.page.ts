@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { Person } from '../core/models/person.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { Paginated } from '../core/models/paginated.model';
 import { PeopleService } from '../core/services/impl/people.service';
 import { PersonModalComponent } from '../components/person-modal/person-modal.component';
-import { Group } from '../core/models/group.model';
+import { GroupService } from '../core/services/impl/group.service';
 
 @Component({
   selector: 'app-people',
@@ -19,6 +19,7 @@ export class PeoplePage implements OnInit {
 
   constructor(
     private peopleSv:PeopleService,
+    private groupsSv: GroupService,
     private modalCtrl:ModalController,
     private alertController: AlertController
   ) { }
@@ -30,13 +31,13 @@ export class PeoplePage implements OnInit {
   selectedPerson: any = null;
   page:number = 1;
   pageSize:number = 25;
+  totalPages!: number;
 
   refresh(){
-    this.page=1;
-    this.peopleSv.getAll(this.page, this.pageSize).subscribe({
+    this.peopleSv.getAll(1, (this.page - 1) * this.pageSize).subscribe({
       next:(response:Paginated<Person>)=>{
-        this._people.next([...response.data]);
-        this.page++;
+        this.totalPages = response.pages;
+        this._people.next(response.data);
       }
     });
   }
@@ -51,23 +52,28 @@ export class PeoplePage implements OnInit {
     })
   }
 
-  async openPersonDetail(person: any, index: number){
-    const modal = await this.modalCtrl.create({
-      component:PersonModalComponent,
-      componentProps:{
-
-      }
-    });
-    modal.onDidDismiss().then((res:any)=>{
-      console.log(res);
-    });
-
-    await modal.present();
-  }
-
-
   onIonInfinite(ev:InfiniteScrollCustomEvent) {
     this.getMorePeople(ev.target);
+  }
+
+  async onUpdatePerson(person: any, index: number){
+    const modal = await this.modalCtrl.create({
+      component: PersonModalComponent,
+      componentProps: {
+        mode: "edit",
+        person: person,
+      }
+    })
+
+    modal.onDidDismiss().then((data:any)=>{
+      this.peopleSv.update(person!.id, data.data).subscribe({
+        next:(response: Person) => {
+          this.refresh();
+        }
+      })
+    })
+
+    await modal.present();
   }
 
   async onAddPerson(){
@@ -77,11 +83,25 @@ export class PeoplePage implements OnInit {
 
       }
     });
-    modal.onDidDismiss().then((res:any)=>{
-      console.log(res);
+
+    modal.onDidDismiss().then((data)=>{
+      let person:Person = {
+        id: '',
+        name: data.data.name,
+        surname: data.data.surname,
+        age: data.data.age,
+        email: data.data.email,
+        gender: data.data.gender,
+        group_id: data.data.group_id
+      }
+      this.peopleSv.add(person).subscribe({
+        next:(response: Person) => {
+          this.refresh();
+        }
+      });
     });
 
-    await modal.present();
+    return await modal.present();
   }
 
   async onDeletePerson(person:Person){

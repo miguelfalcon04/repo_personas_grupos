@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Group } from 'src/app/core/models/group.model';
 import { Person } from 'src/app/core/models/person.model';
 
 @Component({
@@ -11,18 +13,38 @@ import { Person } from 'src/app/core/models/person.model';
 export class PersonModalComponent  implements OnInit {
   genders:string[] = ['Masculino', 'Femenino', 'Otros'];
   formGroup:FormGroup;
-  @Input() person:Person|undefined;
+  mode:'new' | 'edit' = 'new'
+
+  private _groups:BehaviorSubject<Group[]> = new BehaviorSubject<Group[]>([]);
+  public groups$:Observable<Group[]> = this._groups.asObservable();
+
+  @Input() set groups(groups:Group[]){
+    this._groups.next(groups);
+  }
+
+  @Input() set person(_person:Person){
+    if(_person && _person.id)
+      this.mode = 'edit';
+
+    this.formGroup.controls['name'].setValue(_person.name);
+    this.formGroup.controls['surname'].setValue(_person.surname);
+    this.formGroup.controls['age'].setValue(_person.age);
+    this.formGroup.controls['gender'].setValue(_person.gender);
+    this.formGroup.controls['email'].setValue(_person.email);
+    this.formGroup.controls['group_id'].setValue(_person.group_id);
+  }
 
   constructor(
     private fb:FormBuilder,
-    private modalCtrl:ModalController
+    private modalCtrl:ModalController,
   ) {
     this.formGroup = this.fb.group({
       name:['', [Validators.required, Validators.minLength(2)]],
       surname:['', [Validators.required, Validators.minLength(2)]],
       email:['', [Validators.required, Validators.email]],
       gender:['', [Validators.required]],
-      age:['', [Validators.pattern("/\d/g")]]
+      age:['', [Validators.pattern("/\d/g")]],
+      group_id: [null, [Validators.required]]
     });
   }
 
@@ -48,11 +70,30 @@ export class PersonModalComponent  implements OnInit {
     return this.formGroup.controls['gender'];
   }
 
+  get group_id() {
+    return this.formGroup.get('group_id');
+  }
+
+  getDirtyValues(formGroup: FormGroup): any {
+    const dirtyValues: any = {};
+
+    Object.keys(formGroup.controls).forEach(key => {
+      const control = formGroup.get(key);
+      if (control?.dirty) {
+        dirtyValues[key] = control.value;
+      }
+    });
+
+    return dirtyValues;
+  }
+
   onSubmit(){
     if (this.formGroup.valid) {
-      console.log('Formulario enviado:', this.formGroup.value);
-      // Pasar los datos al cerrar el modal
-      this.modalCtrl.dismiss(this.formGroup.value);
+      this.modalCtrl.dismiss(
+          (this.mode=='new'?
+            this.formGroup.value:
+            this.getDirtyValues(this.formGroup)), this.mode
+      );
     } else {
       console.log('Formulario inválido');
     }

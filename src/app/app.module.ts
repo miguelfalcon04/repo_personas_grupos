@@ -16,9 +16,10 @@ import { PeopleMappingJsonServer } from './core/repositories/impl/people-mapping
 import { GroupMappingJsonServer } from './core/repositories/impl/group-mapping-json-server.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PersonModalComponent } from './components/person-modal/person-modal.component';
+import { GroupSelectableComponent } from './components/group-selectable/group-selectable.component';
 
 @NgModule({
-  declarations: [AppComponent, PersonModalComponent],
+  declarations: [AppComponent, PersonModalComponent, GroupSelectableComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

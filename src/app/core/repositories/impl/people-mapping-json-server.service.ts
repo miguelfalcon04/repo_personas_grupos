@@ -22,23 +22,22 @@ export interface PersonRaw {
     }
     getOne(data: PersonRaw):Person {
         return {
-            id:data.id, 
-            name:data.nombre, 
-            surname:data.apellidos, 
+            id:data.id,
+            name:data.nombre,
+            surname:data.apellidos,
             age:(data as any)["age"]??0,
             picture:(data as any)["picture"]?{
-                large:(data as any)["picture"].large, 
+                large:(data as any)["picture"].large,
                 thumbnail:(data as any)["picture"].thumbnail
             }:undefined};
     }
     getAdded(data: any):Person {
-        throw new Error("Method not implemented.");
+      return this.getOne(data)
     }
     getUpdated(data: any):Person {
-        throw new Error("Method not implemented.");
+      return this.getOne(data)
     }
     getDeleted(data: any):Person {
-        throw new Error("Method not implemented.");
+      return this.getOne(data)
     }
   }
-  
