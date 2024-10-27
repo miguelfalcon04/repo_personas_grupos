@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'grupos',
-    loadChildren: () => import('./grupos/grupos.module').then( m => m.GruposPageModule)
+    loadChildren: () => import('./groups/groups.module').then( m => m.GruposPageModule)
   },
 ];
 

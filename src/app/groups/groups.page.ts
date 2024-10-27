@@ -7,11 +7,11 @@ import { Group } from '../core/models/group.model';
 import { GroupService } from '../core/services/impl/group.service';
 
 @Component({
-  selector: 'app-grupos',
-  templateUrl: './grupos.page.html',
-  styleUrls: ['./grupos.page.scss'],
+  selector: 'app-groups',
+  templateUrl: './groups.page.html',
+  styleUrls: ['./groups.page.scss'],
 })
-export class GruposPage implements OnInit {
+export class GroupsPage implements OnInit {
 
   _group:BehaviorSubject<Group[]> = new BehaviorSubject<Group[]>([])
   group$:Observable<Group[]> = this._group.asObservable();
