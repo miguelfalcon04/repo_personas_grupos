@@ -12,6 +12,9 @@ interface GroupRaw{
   providedIn:'root'
 })
 export class GroupLocalStorageMapping implements IBaseMapping<Group>{
+  getAll(data: any): Group[] {
+    throw new Error("Method not implemented.");
+  }
 
   getPaginated(page: number, pageSize: number, pages: number, data: GroupRaw[]): Paginated<Group> {
     return {page:page, pageSize:pageSize, pages:pages, data:data.map<Group>((d:GroupRaw)=>{

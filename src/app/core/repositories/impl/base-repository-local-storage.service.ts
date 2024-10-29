@@ -27,7 +27,7 @@ export class BaseRespositoryLocalStorageService<T extends Model> implements IBas
   constructor(
     @Inject(RESOURCE_NAME_TOKEN) protected resource:string, //nombre del recurso del repositorio
     @Inject(REPOSITORY_MAPPING_TOKEN) protected mapping:IBaseMapping<T>
-  
+
   ) {
     let mockupList:any[] = [];
     for(let i = 0; i<100;i++){
@@ -51,13 +51,17 @@ export class BaseRespositoryLocalStorageService<T extends Model> implements IBas
     localStorage.setItem(this.resource, JSON.stringify(this._items));
   }
 
+  getAllElements(): Observable<T[]> {
+    throw new Error('Method not implemented.');
+  }
+
   getAll(page:number, pageSize:number): Observable<Paginated<T>> {
     return of(
       this.mapping.getPaginated(page, pageSize, Math.ceil(this._items.length / pageSize),
         this._items.slice(
-          page*pageSize, 
+          page*pageSize,
           Math.min(
-            (page+1)*pageSize, 
+            (page+1)*pageSize,
             this._items.length
           )
         )
@@ -84,7 +88,7 @@ export class BaseRespositoryLocalStorageService<T extends Model> implements IBas
       localStorage.setItem(this.resource, JSON.stringify(this._items));
       return of(this.mapping.getUpdated(this._items[index]));
     }
-    throw new Error("id not found"); 
+    throw new Error("id not found");
   }
 
   delete(id: string): Observable<T> {

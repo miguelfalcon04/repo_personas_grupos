@@ -9,12 +9,19 @@ export interface PersonRaw {
     apellidos: string
     email: string
     genero: string
-    grupoId: string
+    grupo_id: string
 }
 @Injectable({
     providedIn: 'root'
   })
   export class PeopleMappingJsonServer implements IBaseMapping<Person> {
+
+    constructor() { }
+
+    getAll(data: PersonRaw[]): Person[] {
+      return data.map<Person>((d: PersonRaw) => this.getOne(d))
+    }
+
     getPaginated(page:number, pageSize: number, pages:number, data:PersonRaw[]): Paginated<Person> {
         return {page:page, pageSize:pageSize, pages:pages, data:data.map<Person>((d:PersonRaw)=>{
             return this.getOne(d);

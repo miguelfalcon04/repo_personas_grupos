@@ -4,6 +4,7 @@ import { Model } from '../../models/base.model';
 import { Paginated } from '../../models/paginated.model';
 
 export interface IBaseRepository<T extends Model> {
+  getAllElements(): Observable<T[]>;
   getAll(page:number, pageSize:number): Observable<Paginated<T>>;
   getById(id: string): Observable<T | null>;
   add(entity: T): Observable<T>; // Retorna el ID generado

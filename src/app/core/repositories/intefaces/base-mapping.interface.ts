@@ -4,6 +4,7 @@ import { Model } from '../../models/base.model';
 import { Paginated } from '../../models/paginated.model';
 
 export interface IBaseMapping<T> {
+  getAll(data: any): T[];
   getPaginated(page:number, pageSize: number, pages:number, data:any):Paginated<T>;
   getOne(data:any):T;
   getAdded(data:any):T;

@@ -16,6 +16,10 @@ export class BaseService<T extends Model> implements IBaseService<T> {
     @Inject(REPOSITORY_TOKEN) protected repository: IBaseRepository<T>
   ) {}
 
+  getAllElements(): Observable<T[]> {
+    return this.repository.getAllElements();
+  }
+
   // Método de IBaseService
   getAll(page:number = 0, pageSize:number = 25): Observable<Paginated<T>> {
     // LLama al metodo de IBaseRepository y le devuelve un Observable<Paginated<T>>

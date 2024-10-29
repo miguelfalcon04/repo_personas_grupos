@@ -80,7 +80,7 @@ export class PeoplePage implements OnInit {
     const modal = await this.modalCtrl.create({
       component:PersonModalComponent,
       componentProps:{
-
+        groups: await lastValueFrom(this.groupsSv.getAllElements()),
       }
     });
 

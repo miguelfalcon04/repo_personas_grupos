@@ -51,7 +51,7 @@
       <p *ngIf="gender?.errors?.['required']">El género es obligatorio.</p>
     </ion-text>
 
-    <app-group-selectable [groups]="(groups$ | async)!" formControlName="groupId"></app-group-selectable>
+    <app-group-selectable formControlName="group_id" [groups]="(groups$ | async)!!" ></app-group-selectable>
 
 
     <!-- Botón de Envío -->

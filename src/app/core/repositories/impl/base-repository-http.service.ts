@@ -22,6 +22,13 @@ export class BaseRepositoryHttpService<T extends Model> implements IBaseReposito
   ) {
     this.apiUrl = apiUrl;
   }
+  getAllElements(): Observable<T[]> {
+    return this.http.get<T>(`${this.apiUrl}/${this.resource}`).pipe(
+      map((res) => {
+        return this.mapping.getAll(res);
+      })
+    );
+  }
 
   getAll(page:number, pageSize:number): Observable<Paginated<T>> {
     return this.http.get<T[]>(`${this.apiUrl}/${this.resource}`).pipe(map(res=>this.mapping.getPaginated(page, pageSize, 0, res)));

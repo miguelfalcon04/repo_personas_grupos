@@ -13,6 +13,12 @@ export interface GroupRaw{
 })
 export class GroupMappingJsonServer implements IBaseMapping<Group>{
 
+  constructor() { }
+
+  getAll(data: GroupRaw[]): Group[] {
+    return data.map<Group>((d: GroupRaw) => this.getOne(d))
+  }
+
   getPaginated(page:number, pageSize:number, pages:number, data: GroupRaw[]): Paginated<Group> {
     return {page:page, pageSize:pageSize, pages:pages, data:data.map<Group>((d:GroupRaw)=>{
         return this.getOne(d);

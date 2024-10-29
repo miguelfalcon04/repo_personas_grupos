@@ -4,6 +4,7 @@ import { Paginated } from '../../models/paginated.model';
 
 // Interfaz BASE GENÉRICA de la que extienden el ressto
 export interface IBaseService<T> {
+  getAllElements(): Observable<T[]>,
   getAll(page:number, pageSize:number): Observable<Paginated<T>>;
   getById(id: string): Observable<T | null>;
   add(entity: T): Observable<T>;
