@@ -14,6 +14,12 @@ export interface GroupRaw{
 export class GroupMappingJsonServer implements IBaseMapping<Group>{
 
   constructor() { }
+  setAdd(data: Group) {
+    throw new Error("Method not implemented.");
+  }
+  setUpdate(data: any) {
+    throw new Error("Method not implemented.");
+  }
 
   getAll(data: GroupRaw[]): Group[] {
     return data.map<Group>((d: GroupRaw) => this.getOne(d))

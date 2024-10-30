@@ -11,6 +11,7 @@ interface PersonRaw{
         last:string;
     },
     age:number,
+    genero:string,
     picture:{
         large:string
         thumbnail:string
@@ -23,6 +24,12 @@ interface PersonRaw{
   export class PeopleLocalStorageMapping implements IBaseMapping<Person> {
 
     constructor() { }
+    setAdd(data: Person) {
+      throw new Error("Method not implemented.");
+    }
+    setUpdate(data: any) {
+      throw new Error("Method not implemented.");
+    }
 
     getAll(data: any): Person[] {
       throw new Error('Method not implemented.');
@@ -39,6 +46,7 @@ interface PersonRaw{
             name:data.name.first,
             surname:data.name.last,
             age:data.age,
+            gender:data.genero,
             picture:{
                 large:data.picture.large,
                 thumbnail:data.picture.thumbnail

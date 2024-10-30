@@ -12,6 +12,12 @@ interface GroupRaw{
   providedIn:'root'
 })
 export class GroupLocalStorageMapping implements IBaseMapping<Group>{
+  setAdd(data: Group) {
+    throw new Error("Method not implemented.");
+  }
+  setUpdate(data: any) {
+    throw new Error("Method not implemented.");
+  }
   getAll(data: any): Group[] {
     throw new Error("Method not implemented.");
   }

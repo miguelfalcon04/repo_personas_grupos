@@ -62,6 +62,7 @@ export class PeoplePage implements OnInit {
       componentProps: {
         mode: "edit",
         person: person,
+        groups: await lastValueFrom(this.groupsSv.getAllElements()),
       }
     })
 

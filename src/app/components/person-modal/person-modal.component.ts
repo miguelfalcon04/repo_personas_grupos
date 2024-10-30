@@ -43,7 +43,7 @@ export class PersonModalComponent  implements OnInit {
       surname:['', [Validators.required, Validators.minLength(2)]],
       email:['', [Validators.required, Validators.email]],
       gender:['', [Validators.required]],
-      age:['', [Validators.pattern("/\d/g")]],
+      age:['', [Validators.pattern(/^\d+$/)]],
       group_id: [null, [Validators.required]]
     });
   }

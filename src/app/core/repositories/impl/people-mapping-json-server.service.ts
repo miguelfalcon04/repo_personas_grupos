@@ -4,7 +4,7 @@ import { Paginated } from "../../models/paginated.model";
 import { Person } from "../../models/person.model";
 
 export interface PersonRaw {
-    id: string
+    id?: string
     nombre: string
     apellidos: string
     edad?:string
@@ -19,6 +19,33 @@ export interface PersonRaw {
 
     constructor() { }
 
+    toGenderMapping:any = {
+      Masculino:'male',
+      Femenino:'female',
+      Otros:'other'
+  };
+
+  fromGenderMapping:any = {
+      male:'Masculino',
+      female:'Femenino',
+      other:'Otros'
+  };
+
+
+    setAdd(data: Person):PersonRaw{
+      return {
+        nombre:data.name,
+        apellidos:data.surname,
+        email:data.email??'',
+        edad:data.age?.toString()??'',
+        genero: this.toGenderMapping[data.gender],
+        grupoId:data.group_id??''
+    };
+    }
+    setUpdate(data: any) {
+      throw new Error("Method not implemented.");
+    }
+
     getAll(data: PersonRaw[]): Person[] {
       return data.map<Person>((d: PersonRaw) => this.getOne(d))
     }
@@ -30,10 +57,13 @@ export interface PersonRaw {
     }
     getOne(data: PersonRaw):Person {
         return {
-            id:data.id,
+            id:data.id!,
             name:data.nombre,
             surname:data.apellidos,
             age:(data as any)["edad"]??0,
+            email:(data as any)["email"]??'',
+            group_id:(data as any)["grupoId"]??'',
+            gender:this.fromGenderMapping[data.genero],
             picture:(data as any)["picture"]?{
                 large:(data as any)["picture"].large,
                 thumbnail:(data as any)["picture"].thumbnail

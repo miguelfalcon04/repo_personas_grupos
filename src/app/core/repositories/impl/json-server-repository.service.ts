@@ -41,5 +41,12 @@ export class JsonServerRepositoryService<T extends Model> extends BaseRepository
       }));
   }
 
-  
+  override add(entity: T): Observable<T> {
+    return this.http.post<T>(
+      `${this.apiUrl}/${this.resource}`, this.mapping.setAdd(entity)).pipe(map(res=>{
+        return this.mapping.getAdded(res);
+      }));
+  }
+
+
 }
