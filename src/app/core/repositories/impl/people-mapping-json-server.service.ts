@@ -42,8 +42,26 @@ export interface PersonRaw {
         grupoId:data.group_id??''
     };
     }
-    setUpdate(data: any) {
-      throw new Error("Method not implemented.");
+    setUpdate(data: Person): PersonRaw {
+      let toReturn:any = {};
+      Object.keys(data).forEach(key =>{
+        switch(key){
+          case 'name': toReturn['nombre']=data[key];
+                break;
+                case 'surname': toReturn['apellidos']=data[key];
+                break;
+                case 'age': toReturn['edad']=data[key];
+                break;
+                case 'email': toReturn['email']=data[key];
+                break;
+                case 'gender': toReturn['genero']=data[key]=='Masculino'?'male':data[key]=='Femenino'?'female':'other';
+                break;
+                case 'group_id': toReturn['grupoId']=data[key];
+                break;
+                default:
+        }
+      });
+      return toReturn;
     }
 
     getAll(data: PersonRaw[]): Person[] {
