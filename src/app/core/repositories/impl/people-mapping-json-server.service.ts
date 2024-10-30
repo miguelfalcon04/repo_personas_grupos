@@ -7,9 +7,10 @@ export interface PersonRaw {
     id: string
     nombre: string
     apellidos: string
+    edad?:string
     email: string
     genero: string
-    grupo_id: string
+    grupoId: string
 }
 @Injectable({
     providedIn: 'root'
@@ -32,7 +33,7 @@ export interface PersonRaw {
             id:data.id,
             name:data.nombre,
             surname:data.apellidos,
-            age:(data as any)["age"]??0,
+            age:(data as any)["edad"]??0,
             picture:(data as any)["picture"]?{
                 large:(data as any)["picture"].large,
                 thumbnail:(data as any)["picture"].thumbnail

@@ -38,12 +38,12 @@ export class MyPeopleService{
         return this.http.get<PaginatedRaw<PersonRaw>>(`${this.apiUrl}/?_page=${page}&_per_page=${pageSize}`).pipe(map(res=>{
             return {page:page, pageSize:pageSize, pages:res.pages, data:res.data.map<Person>((d:PersonRaw)=>{
                 return {
-                    id:d.id, 
-                    name:d.nombre, 
-                    surname:d.apellidos, 
+                    id:d.id,
+                    name:d.nombre,
+                    surname:d.apellidos,
                     age:(d as any)["age"]??0,
                     picture:(d as any)["picture"]?{
-                        large:(d as any)["picture"].large, 
+                        large:(d as any)["picture"].large,
                         thumbnail:(d as any)["picture"].thumbnail
                     }:undefined};
             })};
