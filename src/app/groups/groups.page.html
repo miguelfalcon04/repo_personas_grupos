@@ -19,6 +19,9 @@
       <ion-label class="ion-text-nowrap">
         {{group.name}}
       </ion-label>
+      <ion-button (click)="onDeleteGroup(group)" slot="end" fill="clear">
+        <ion-icon slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 
