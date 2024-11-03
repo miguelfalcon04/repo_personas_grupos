@@ -134,5 +134,4 @@ export class PeoplePage implements OnInit {
 
     await alert.present();
   }
-
 }
