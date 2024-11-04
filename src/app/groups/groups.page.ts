@@ -49,13 +49,6 @@ export class GroupsPage implements OnInit {
     })
   }
 
-
-
-
-  async onAddGroup(){
-    this.modalCtrl
-  }
-
   async onDeleteGroup(group:Group){
     const alert = await this.alertController.create({
       header: "Eliminar grupo",

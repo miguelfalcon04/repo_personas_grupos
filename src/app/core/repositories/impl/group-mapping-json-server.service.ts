@@ -39,13 +39,13 @@ export class GroupMappingJsonServer implements IBaseMapping<Group>{
   }
 
   getAdded(data: any): Group {
-    throw new Error("Method not implemented.");
+    return this.getOne(data);
   }
   getUpdated(data: any): Group {
-    throw new Error("Method not implemented.");
+    return this.getOne(data);
   }
   getDeleted(data: any): Group {
-    throw new Error("Method not implemented.");
+    return this.getOne(data);
   }
 
 }
