@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BaseRepositoryHttpService } from './impl/base-repository-http.service';
 import { IBaseRepository } from './intefaces/base-repository.interface';
 import { Person } from '../models/person.model';
-import { GROUP_API_URL_TOKEN, GROUP_REPOSITORY_MAPPING_TOKEN, GROUP_REPOSITORY_TOKEN, GROUP_RESOURCE_NAME_TOKEN, PEOPLE_API_URL_TOKEN, PEOPLE_REPOSITORY_MAPPING_TOKEN, PEOPLE_REPOSITORY_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN } from './repository.tokens';
+import { GROUPS_API_URL_TOKEN, GROUPS_REPOSITORY_MAPPING_TOKEN, GROUP_REPOSITORY_TOKEN, GROUP_RESOURCE_NAME_TOKEN, PEOPLE_API_URL_TOKEN, PEOPLE_REPOSITORY_MAPPING_TOKEN, PEOPLE_REPOSITORY_TOKEN, PEOPLE_RESOURCE_NAME_TOKEN } from './repository.tokens';
 import { BaseRespositoryLocalStorageService } from './impl/base-repository-local-storage.service';
 import { Model } from '../models/base.model';
 import { IBaseMapping } from './intefaces/base-mapping.interface';
@@ -46,7 +46,7 @@ export const GroupRepositoryFactory: FactoryProvider = {
     //return createLocalStorageRepository<Person>(resource, mapping);
     return createJsonServerRepository<Group>(http, apiURL, resource, mapping);
   },
-  deps: [HttpClient, GROUP_API_URL_TOKEN, GROUP_RESOURCE_NAME_TOKEN, GROUP_REPOSITORY_MAPPING_TOKEN]
+  deps: [HttpClient, GROUPS_API_URL_TOKEN, GROUP_RESOURCE_NAME_TOKEN, GROUPS_REPOSITORY_MAPPING_TOKEN]
 };
 
 // Repite esto para otros modelos como Usuario, etc.

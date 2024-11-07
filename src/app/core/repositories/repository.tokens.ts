@@ -22,11 +22,11 @@ export const TASKS_REPOSITORY_TOKEN = new InjectionToken<ITasksRepository>('ITas
 // Proporcionan la URL de la API con la que trabajará la app
 export const API_URL_TOKEN = new InjectionToken<string>('ApiUrl');
 export const PEOPLE_API_URL_TOKEN = new InjectionToken<string>('PeopleApiUrl');
-export const GROUP_API_URL_TOKEN = new InjectionToken<string>('GroupApiUrl');
+export const GROUPS_API_URL_TOKEN = new InjectionToken<string>('GroupApiUrl');
 export const TASKS_API_URL_TOKEN = new InjectionToken<string>('TasksApiUrl');
 
 // Permiten inyectar el mapeo entre los datos de la API y los modelos de la aplicación
 export const REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<any>>('IBaseRepositoryMapping');
 export const PEOPLE_REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<Person>>('IPeopleRepositoryMapping');
-export const GROUP_REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<Group>>('IGroupRepositoryMapping');
+export const GROUPS_REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<Group>>('IGroupRepositoryMapping');
 
