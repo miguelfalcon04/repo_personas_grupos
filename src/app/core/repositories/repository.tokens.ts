@@ -24,6 +24,10 @@ export const API_URL_TOKEN = new InjectionToken<string>('ApiUrl');
 export const PEOPLE_API_URL_TOKEN = new InjectionToken<string>('PeopleApiUrl');
 export const GROUPS_API_URL_TOKEN = new InjectionToken<string>('GroupApiUrl');
 export const TASKS_API_URL_TOKEN = new InjectionToken<string>('TasksApiUrl');
+export const AUTH_API_URL_TOKEN = new InjectionToken<string>('AuthApiUrl');
+export const AUTH_SIGN_IN_TOKEN = new InjectionToken<string>('SignInApiUrl');
+export const AUTH_SIGN_UP_TOKEN = new InjectionToken<string>('SignUpApiUrl');
+
 
 // Permiten inyectar el mapeo entre los datos de la API y los modelos de la aplicación
 export const REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<any>>('IBaseRepositoryMapping');
